@@ -30,12 +30,16 @@ ${_generateModelsMapping(dartCode, options)}};''';
         final key = classes.keys.elementAt(i).toString();
 
         final definition = classes[key];
-
+        
         if (definition['enum'] != null) {
           continue;
         }
 
         if (kBasicTypes.contains(definition['type'].toString().toLowerCase())) {
+          continue;
+        }
+
+        if(key.toLowerCase()==kObject){
           continue;
         }
 

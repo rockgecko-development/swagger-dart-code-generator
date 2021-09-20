@@ -32,6 +32,10 @@ abstract class SwaggerModelsGenerator {
       List<String> allEnumNames,
       List<String> allEnumListNames,
       GeneratorOptions options) {
+    if(className.toLowerCase()==kObject){
+      return '';
+    }
+
     if (map['enum'] != null) {
       return '';
     }
