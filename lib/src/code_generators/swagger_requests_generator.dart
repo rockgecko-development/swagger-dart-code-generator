@@ -316,9 +316,12 @@ class SwaggerRequestsGenerator {
       parameter.schema?.ref.getRef(),
       parameter.items?.ref.getRef(),
     ];
-    final schema =
-        schemas[refs.firstWhereOrNull((ref) => ref?.isNotEmpty == true)];
-
+    final ref = refs.firstWhereOrNull((ref) => ref?.isNotEmpty == true);
+    if(ref==null) return false;    
+    final origSchemaKey =
+        schemas.keys.firstWhereOrNull((e) => SwaggerModelsGenerator.getValidatedClassName(e)==ref);
+    final schema = schemas[origSchemaKey];
+  
     if (schema == null) {
       return false;
     }

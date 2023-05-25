@@ -437,7 +437,7 @@ abstract class SwaggerModelsGenerator {
     var description='';
     if(propertyEntryMap.containsKey('description')) {
       description = propertyEntryMap['description'].toString().trim();
-      if(description.isNotEmpty) description='/// $description\n';
+      if(description.isNotEmpty) description='/// ${description.replaceAll('\n', '\n///')}\n';
     }
 
     final jsonKeyContent =
@@ -518,7 +518,7 @@ abstract class SwaggerModelsGenerator {
     var description='\n';
     if(propertyEntryMap.containsKey('description')) {
       description = propertyEntryMap['description'].toString().trim();
-      if(description.isNotEmpty) description='/// $description\n';
+      if(description.isNotEmpty) description='/// ${description.replaceAll('\n', '\n///')}\n';
     }
     
     final jsonKeyContent =
@@ -569,7 +569,7 @@ abstract class SwaggerModelsGenerator {
     var description='\n';
     if(propertyEntryMap.containsKey('description')) {
       description = propertyEntryMap['description'].toString().trim();
-      if(description.isNotEmpty) description='/// $description\n';
+      if(description.isNotEmpty) description='/// ${description.replaceAll('\n', '\n///')}\n';
     }
 
     final jsonKeyContent =
@@ -677,7 +677,7 @@ abstract class SwaggerModelsGenerator {
     var description='\n';
     if(propertyEntryMap.containsKey('description')) {
       description = propertyEntryMap['description'].toString().trim();
-      if(description.isNotEmpty) description='/// $description\n';
+      if(description.isNotEmpty) description='/// ${description.replaceAll('\n', '\n///')}\n';
     }
 
     String jsonKeyContent;
@@ -755,7 +755,7 @@ abstract class SwaggerModelsGenerator {
     var description='\n';
     if(val.containsKey('description')) {
       description = val['description'].toString().trim();
-      if(description.isNotEmpty) description='/// $description\n';
+      if(description.isNotEmpty) description='/// ${description.replaceAll('\n', '\n///')}\n';
     }
 
     return '$description\t$jsonKeyContent\t${_generateFinalIfImmutable(options)}$typeName $propertyName;';
