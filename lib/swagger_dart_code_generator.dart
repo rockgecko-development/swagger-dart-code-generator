@@ -4,6 +4,8 @@ import 'package:swagger_dart_code_generator/src/models/generator_options.dart';
 import 'package:swagger_dart_code_generator/src/swagger_code_generator.dart';
 import 'package:universal_io/io.dart';
 import 'package:dart_style/dart_style.dart';
+import 'package:path/path.dart' show join, normalize;
+
 
 ///Returns instance of SwaggerDartCodeGenerator
 SwaggerDartCodeGenerator swaggerCodeBuilder(BuilderOptions options) =>
@@ -17,12 +19,38 @@ const String _outputResponsesFileExtension = '.responses.swagger.dart';
 const String _indexFileName = 'client_index.dart';
 const String _mappingFileName = 'client_mapping.dart';
 
+String additionalResultPath = '';
+
+String _getAdditionalResultPath(GeneratorOptions options) {
+  final filesList = Directory(normalize(options.inputFolder)).listSync();
+
+  if (filesList.isNotEmpty) {
+    return filesList.first.path;
+  }
+
+  return Directory(normalize(options.inputFolder)).listSync().first.path;
+}
+
 Map<String, List<String>> _generateExtensions(GeneratorOptions options) {
   final filesList = Directory(options.inputFolder).listSync().where(
       (FileSystemEntity file) =>
           _inputFileExtensions.any((ending) => file.path.endsWith(ending)));
 
   final result = <String, List<String>>{};
+
+  if (options.overridenModels.isNotEmpty) {
+    final path = normalize('${options.outputFolder}overriden_models.dart');
+
+    if (!Directory(options.outputFolder).existsSync()) {
+      Directory(options.outputFolder).createSync();
+    }
+
+    if (!File(path).existsSync()) {
+      File(path).createSync();
+      File(path).writeAsString(
+          '//Put your overriden models here (${options.overridenModels.join(',')})');
+    }
+  }
 
   filesList.forEach((FileSystemEntity element) {
     final name = getFileNameBase(element.path);

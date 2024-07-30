@@ -25,6 +25,7 @@ class GeneratorOptions {
     this.modelPostfix = '',
     this.includePaths = const [],
     this.excludePaths = const [],
+    this.overridenModels = const [],
   });
 
   /// Build options from a JSON map.
@@ -87,6 +88,9 @@ class GeneratorOptions {
 
   @JsonKey(defaultValue: [])
   final List<String> excludePaths;
+
+  @JsonKey(defaultValue: [])
+  final List<String> overridenModels;
 
   /// Convert this options instance to JSON.
   Map<String, dynamic> toJson() => _$GeneratorOptionsToJson(this);

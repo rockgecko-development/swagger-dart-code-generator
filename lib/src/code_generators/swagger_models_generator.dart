@@ -32,6 +32,10 @@ abstract class SwaggerModelsGenerator {
       List<String> allEnumNames,
       List<String> allEnumListNames,
       GeneratorOptions options) {
+    if(options.overridenModels.contains(getValidatedClassName(className)))
+    {
+      return '';
+    }
     if(className.toLowerCase()==kObject){
       return '';
     }

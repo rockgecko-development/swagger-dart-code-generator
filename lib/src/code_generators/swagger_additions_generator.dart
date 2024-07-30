@@ -62,6 +62,9 @@ $maps};
 
     final chopperPartImport =
         buildOnlyModels ? '' : "part '$swaggerFileName.swagger.chopper.dart';";
+        //TODO: read from GeneratorOptions. Use options.overridenModels.isEmpty ? '' : 'import \'overriden_models.dart\';';
+
+    final overridenModels = 'import \'overriden_models.dart\';';
 
     final chopperImports = buildOnlyModels
         ? ''
@@ -85,6 +88,7 @@ import 'package:collection/collection.dart';
 """);
     }
 
+    result.write(overridenModels);
     if (chopperImports.isNotEmpty) {
       result.write(chopperImports);
     }

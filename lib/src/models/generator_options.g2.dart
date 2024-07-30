@@ -49,6 +49,10 @@ GeneratorOptions _$GeneratorOptionsFromJson(Map json) {
             ?.map((e) => e as String)
             .toList() ??
         [],
+        overridenModels: (json['overriden_models'] as List<dynamic>?)
+            ?.map((e) => e as String)
+            .toList() ??
+        [],
   );
 }
 
@@ -74,6 +78,7 @@ Map<String, dynamic> _$GeneratorOptionsToJson(GeneratorOptions instance) =>
       'response_override_value_map': instance.responseOverrideValueMap,
       'include_paths': instance.includePaths,
       'exclude_paths': instance.excludePaths,
+      'overriden_models': instance.overridenModels,
     };
 
 DefaultValueMap _$DefaultValueMapFromJson(Map<String, dynamic> json) {
